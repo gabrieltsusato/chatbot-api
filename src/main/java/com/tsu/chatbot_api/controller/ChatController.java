@@ -22,11 +22,9 @@ public class ChatController {
 
     @PostMapping
     public ResponseEntity<ChatResponse> conversar(@Valid @RequestBody ChatRequest request){
-        String resposta = chatService.responder(request.mensagem());
 
-        ChatResponse response = new ChatResponse(
-                request.mensagem(),
-                resposta
+        ChatResponse response = chatService.responder(
+                request.mensagem(), request.conversationId()
         );
 
         return ResponseEntity.ok(response);
